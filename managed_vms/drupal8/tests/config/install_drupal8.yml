@@ -1,0 +1,22 @@
+commands:
+# Download Drupal
+  - command: site:new
+    arguments:
+      directory: drupal8.test
+      version: 8.0.3
+# Install Drupal
+  - command: site:install
+    options:
+        langcode: en
+        db-type: mysql
+        db-host: 173.194.241.174
+        db-name: drupal8
+        db-user: drupal
+        db-pass: securethisissecurelala
+        site-name: 'Drupal 8 on Managed VMs E2E Test'
+        site-mail: betterbrent@google.com
+        account-name: admin
+        account-pass: admin
+        account-mail: betterbrent@google.com
+    arguments:
+        profile: standard

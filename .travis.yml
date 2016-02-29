@@ -56,3 +56,7 @@ script:
   - composer install
   - phpunit listBucketsTest.php
   - cd ../..
+  # run managed_vms tests
+  - cd managed_vms/drupal8
+  - bash tests/run_tests.sh
+  - cd ../..
