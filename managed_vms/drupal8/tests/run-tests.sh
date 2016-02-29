@@ -6,8 +6,8 @@ SAMPLE_DIR="${DIR}/.."
 DRUPAL_DIR="${SAMPLE_DIR}/drupal8.test"
 
 VARS=(
-    GCLOUD_PROJECT_ID
-    GCLOUD_VERSION_ID
+    GOOGLE_PROJECT_ID
+    GOOGLE_VERSION_ID
     DRUPAL_ADMIN_USERNAME
     DRUPAL_ADMIN_PASSWORD
     DRUPAL_DATABASE_NAME
@@ -29,7 +29,7 @@ if [ "${PREREQ}" = "false" ]; then
     exit 1
 fi
 
-# Install drupal
+# Install drupal console
 if [ ! -e ${HOME}/bin/drupal ]; then
     curl https://drupalconsole.com/installer -L -o drupal
     chmod +x drupal
@@ -48,8 +48,15 @@ sed -i -e "s/@@DRUPAL_DATABASE_HOST@@/${DRUPAL_DATABASE_HOST}/" $INSTALL_FILE
 sed -i -e "s/@@DRUPAL_ADMIN_USERNAME@@/${DRUPAL_ADMIN_USERNAME}/" $INSTALL_FILE
 sed -i -e "s/@@DRUPAL_ADMIN_PASSWORD@@/${DRUPAL_ADMIN_PASSWORD}/" $INSTALL_FILE
 
+# download and install
 drupal init --root=$DIR
 drupal chain --file=$INSTALL_FILE
+
+# run some setup commands
+cd $DRUPAL_DIR
+
+drupal theme:download bootstrap 8.x-3.0-beta2
+drupal cache:rebuild all
 
 ## Perform steps outlined in the README ##
 
@@ -61,9 +68,9 @@ cp "${SAMPLE_DIR}/php.ini" "${DRUPAL_DIR}/php.ini"
 
 # Deploy to gcloud
 gcloud preview app deploy \
-  --no-promote --quiet --stop-previous-version \
-  --project=${GCLOUD_PROJECT_ID} \
-  --version=${GCLOUD_VERSION_ID}
+  --no-promote --quiet --stop-previous-version --force \
+  --project=${GOOGLE_PROJECT_ID} \
+  --version=${GOOGLE_VERSION_ID}
 
 # perform the test
-curl -vf https://${GCLOUD_VERSION_ID}-dot-${GCLOUD_PROJECT_ID}.appspot.com
+curl -vf https://${GOOGLE_VERSION_ID}-dot-${GOOGLE_PROJECT_ID}.appspot.com

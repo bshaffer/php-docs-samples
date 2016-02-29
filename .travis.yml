@@ -26,6 +26,7 @@ php:
 env:
   globals:
     - GOOGLE_APPLICATION_CREDENTIALS=$TRAVIS_BUILD_DIR/credentials.json
+    - GOOGLE_VERSION_ID=$TRAVIS_JOB_ID
 
 before_install:
   - php dump_credentials.php
@@ -58,5 +59,5 @@ script:
   - cd ../..
   # run managed_vms tests
   - cd managed_vms/drupal8
-  - bash tests/run_tests.sh
+  - bash tests/run-tests.sh
   - cd ../..
