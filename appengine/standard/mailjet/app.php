@@ -31,6 +31,10 @@ $app->get('/', function () use ($app) {
 <input type="text" name="recipient" placeholder="Enter recipient email">
 <input type="submit" name="submit" value="Send email">
 </form>
+<form method="POST" target="/stats">
+<input type="text" name="message_id" placeholder="Enter Message ID">
+<input type="submit" name="submit" value="Get statistics">
+</form>
 </body></html>
 EOF;
 });
@@ -68,6 +72,28 @@ $app->post('/send', function () use ($app) {
 
     return 'Error: ' . print_r($response->getStatus(), true);
     # [END send_email]
+});
+
+$app->post('/stats', function () use ($app) {
+    /** @var Symfony\Component\HttpFoundation\Request $request */
+    $request = $app['request'];
+    /** @var Mailjet\Client $mailjet */
+    $mailjet = $app['mailjet'];
+    $id = $request->get('message_id');
+
+    # [START get_stats]
+    // trigger the API call
+    $response =  $mailjet->get(Mailjet\Resources::$Messagesentstatistics, ['id' => $id]);
+    if ($response->success()) {
+        // if the call succed, data will go here
+        return sprintf(
+            '<pre>%s</pre>',
+            json_encode($response->getData(), JSON_PRETTY_PRINT)
+        );
+    }
+
+    return 'Error: ' . print_r($response->getStatus(), true);
+    # [END get_stats]
 });
 
 $app['mailjet'] = function () use ($app) {

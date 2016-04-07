@@ -69,4 +69,35 @@ class mailjetTest extends WebTestCase
         $this->assertContains('"Sent"', $response->getContent());
         $this->assertContains('"fake@example.com"', $response->getContent());
     }
+
+    public function testStatistics()
+    {
+        // create an email and then get info about it
+        $body = [
+            'FromEmail' => "betterbrent@google.com",
+            'Subject' => "Email from unit tests",
+            'Text-part' => "Unit tests for mailjet",
+            'Recipients' => [['Email' => 'test@example.com']]
+        ];
+
+        $mailjet = $this->app['mailjet'];
+
+        $response = $mailjet->post(Mailjet\Resources::$Email, ['body' => $body]);
+        $this->assertTrue($response->success());
+
+        $data = $response->getData();
+        $this->assertArrayHasKey('Sent', $data);
+        $this->assertArrayHasKey(0, $data['Sent']);
+        $this->assertArrayHasKey('MessageID', $data['Sent'][0]);
+
+        $client = $this->createClient();
+        $crawler = $client->request('POST', '/stats', [
+            'message_id' => $data['Sent'][0]['MessageID'],
+        ]);
+
+        $response = $client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertContains('"Sent"', $response->getContent());
+        $this->assertContains('"fake@example.com"', $response->getContent());
+    }
 }
