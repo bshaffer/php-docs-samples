@@ -15,3 +15,4 @@
  * limitations under the License.
  */
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../../../testing/E2EDeploymentTrait.php';
