@@ -1,0 +1,7 @@
+{
+    "require-dev": {
+        "symfony\/yaml": "^3.0",
+        "monolog\/monolog": "^1.19",
+        "guzzlehttp\/guzzle": "^6.2"
+    }
+}

@@ -1,0 +1,12 @@
+runtime: php
+vm: true
+
+runtime_config:
+  document_root: public
+
+# Configure Laravel for App Engine Flex
+env_variables:
+  APP_LOG: errorlog
+  CACHE_DRIVER: memcached
+  SESSION_DRIVER: memcached
+  STORAGE_DIR: /tmp

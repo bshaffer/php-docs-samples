@@ -1,0 +1,11 @@
+{
+    "scripts": {
+        "post-deploy-cmd": [
+            "chmod -R 755 bootstrap\/cache",
+            "[ -e .env ] || $PHP_DIR/bin/php -r \"copy('.env.example', '.env');\"",
+            "php artisan optimize",
+            "echo \"MEMCACHED_HOST=$MEMCACHE_PORT_11211_TCP_ADDR\" >> .env",
+            "echo \"MEMCACHED_PORT=$MEMCACHE_PORT_11211_TCP_PORT\" >> .env"
+        ]
+    }
+}
