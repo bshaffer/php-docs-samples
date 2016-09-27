@@ -29,6 +29,9 @@ use Google\Cloud\ServiceBuilder;
 use Google\Cloud\Exception\BadRequestException;
 use InvalidArgumentException;
 use LogicException;
+# [START delete_table_namespaces]
+use Google\Cloud\ServiceBuilder;
+# [END delete_table_namespaces]
 
 /**
  * Command line utility to create a BigQuery schema.
@@ -149,7 +152,15 @@ EOF
                     return $output->writeln('<error>Task cancelled by user.</error>');
                 }
             }
-            delete_table($projectId, $datasetId, $tableId);
+            # [START delete_table]
+            $builder = new ServiceBuilder([
+                'projectId' => $projectId,
+            ]);
+            $bigQuery = $builder->bigQuery();
+            $dataset = $bigQuery->dataset($datasetId);
+            $table = $dataset->table($tableId);
+            $table->delete();
+            # [END delete_table]
 
             return $output->writeln('<info>Table deleted successfully</info>');
         } elseif ($file = $input->getArgument('schema-json')) {
