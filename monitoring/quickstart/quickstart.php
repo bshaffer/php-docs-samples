@@ -23,6 +23,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Google\Api\Metric;
 use Google\Api\MonitoredResource;
 use Google\Cloud\Monitoring\V3\MetricServiceClient;
+use Google\Monitoring\V3\MetricServiceJsonClient;
 use Google\Monitoring\V3\Point;
 use Google\Monitoring\V3\TimeInterval;
 use Google\Monitoring\V3\TimeSeries;
@@ -35,8 +36,16 @@ $projectId = getenv('GCLOUD_PROJECT') ?: 'YOUR_PROJECT_ID';
 $instanceId = '1234567890123456789';
 $zone = 'us-central1-f';
 
+/**
+ * Adds the JSON client as the stub function
+ * This logic will be handled in MetricServiceClient
+ */
+$client = new MetricServiceClient([
+    'createMetricServiceStubFunction' => function ($hostname, $opts) {
+        return new MetricServiceJsonClient($hostname, $opts);
+    },
+]);
 try {
-    $client = new MetricServiceClient();
     $formattedProjectName = MetricServiceClient::formatProjectName($projectId);
     $labels = [
         'instance_id' => $instanceId,
