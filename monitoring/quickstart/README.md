@@ -1,5 +1,12 @@
 # Proto to JSON Demo
 
+## What is happening here?
+
+This is a prototype for making HTTP 1.1 / JSON calls to Google APIs with code generated from
+proto files. Some things of note:
+
+1. [`MetricServiceJsonClient`](https://github.com/bshaffer/google-cloud-php/pull/1)
+
 ## Setup
 
 1. Clone the repository
@@ -24,10 +31,3 @@
     ```
     GCLOUD_PROJECT=your-project-id php quickstart.php
     ```
-
-## What is happening here?
-
-This is a prototype for making HTTP 1.1 / JSON calls to Google APIs with code generated from
-proto files. Some things of note:
-
-1. [`MetricServiceJsonClient`](https://github.com/bshaffer/google-cloud-php/pull/1)

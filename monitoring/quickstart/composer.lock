@@ -299,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/TeBoring/protobuf.git",
-                "reference": "b6ec9200947fbb808c6e5b42dedcc43c7a85200b"
+                "reference": "2f3214b104ebda5f3186399463e03847b7750ac1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TeBoring/protobuf/zipball/b6ec9200947fbb808c6e5b42dedcc43c7a85200b",
-                "reference": "b6ec9200947fbb808c6e5b42dedcc43c7a85200b",
+                "url": "https://api.github.com/repos/TeBoring/protobuf/zipball/2f3214b104ebda5f3186399463e03847b7750ac1",
+                "reference": "2f3214b104ebda5f3186399463e03847b7750ac1",
                 "shasum": ""
             },
             "require": {
@@ -331,7 +331,7 @@
             "support": {
                 "source": "https://github.com/TeBoring/protobuf/tree/php-json"
             },
-            "time": "2017-06-26 20:57:53"
+            "time": "2017-06-27 22:06:29"
         },
         {
             "name": "grpc/grpc",
