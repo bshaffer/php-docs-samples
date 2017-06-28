@@ -1,9 +1,9 @@
 {
     "require": {
-        "google/protobuf": "dev-php-json",
+        "google/protobuf": "dev-php-json as 3.3.2",
         "google/cloud": "dev-proto-to-json",
-        "google/gax": "dev-proto3",
-        "google/proto-client-php": "dev-proto3",
+        "google/gax": "^0.20",
+        "google/proto-client": "^0.20",
         "silex/silex": "^2.1@dev"
     },
     "require-dev": {
@@ -11,15 +11,6 @@
         "squizlabs/php_codesniffer": "2.*"
     },
     "repositories": [{
-        "type": "vcs",
-        "url": "git@github.com:michaelbausor/gcloud-php.git"
-    },{
-        "type": "vcs",
-        "url": "git@github.com:bshaffer/gax-php.git"
-    },{
-        "type": "vcs",
-        "url": "git@github.com:michaelbausor/proto-client-php.git"
-    },{
         "type": "vcs",
         "url": "git@github.com:bshaffer/google-cloud-php.git"
     },{
