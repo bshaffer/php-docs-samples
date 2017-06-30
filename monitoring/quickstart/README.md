@@ -5,7 +5,7 @@
 This is a prototype for making HTTP 1.1 / JSON calls to Google APIs with code generated from
 proto files. Some things of note:
 
-1. [`MetricServiceJsonClient`](https://github.com/bshaffer/google-cloud-php/pull/1)
+1. [`MetricServiceJsonClient`](https://github.com/bshaffer/google-cloud-php/commit/dc716261c463e60d47e9e86091360a32adde61d2)
 
 ## Setup
 
